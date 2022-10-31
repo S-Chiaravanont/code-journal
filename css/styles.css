@@ -80,3 +80,12 @@ li {
   margin: 0;
   padding: 0;
 }
+
+[data-view="entries"] h1 {
+  display: inline-block;
+}
+
+.display-between {
+  display: flex;
+  justify-content: space-between;
+}
