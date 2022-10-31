@@ -1,0 +1,10 @@
+.navbar {
+  height: 40px;
+  width: 100%;
+  background-color: rgb(86 42 129);
+  color: white;
+}
+
+.navbar > h1 {
+  margin: 0;
+}
