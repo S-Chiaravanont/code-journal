@@ -9,13 +9,12 @@ var data = {
 
 var previousJournalEntries = localStorage.getItem('javascript-local-storage');
 if (previousJournalEntries !== null) {
-  data.entries = JSON.parse(previousJournalEntries);
-  data.nextEntryId += data.entries.length;
+  data = JSON.parse(previousJournalEntries);
 }
 
 window.addEventListener('beforeunload', beforeUnloadHandle);
 
 function beforeUnloadHandle(event) {
-  var dataJSON = JSON.stringify(data.entries);
+  var dataJSON = JSON.stringify(data);
   localStorage.setItem('javascript-local-storage', dataJSON);
 }
