@@ -11,23 +11,28 @@
     integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
-    <div class="container navbar">
-      <div class="row">
-        <div class="column-full">
-          <h1>Code Journal</h1>
+    <div class="navbar">
+      <div class="container">
+        <div class="row">
+          <div class="column-full">
+            <h2>Code Journal</h2>
+          </div>
         </div>
       </div>
     </div>
   </header>
   <main>
     <div class="" data-view="entry-form">
-      <form action="" class="container">
+      <form class="container" id="entry-form">
         <div class="row">
           <div class="column-full">
             <h1>New Entry</h1>
@@ -39,10 +44,10 @@
           </div>
           <div class="column-half">
             <label for="title"> Title
-              <input type="text" id="title" required>
+              <input type="text" id="title" name="title" required>
             </label>
             <label for="photo-url"> Photo URL
-              <input type="text" id="photo-url" required>
+              <input type="text" id="photo-url" name="photo" required>
             </label>
           </div>
           <div class="column-full">
@@ -51,7 +56,7 @@
             </label>
           </div>
           <div class="column-full flex-right">
-            <button>SAVE</button>
+            <button id="save-button" type="submit">SAVE</button>
           </div>
         </div>
       </form>

@@ -1,14 +1,25 @@
 var $photoURLInput = document.querySelector('#photo-url');
-$photoURLInput.addEventListener('change', updateImgURL);
+$photoURLInput.addEventListener('change', updateImgURLHandle);
 
 var $imgEntry = document.querySelector('#img-entry');
-var placeholderImgEntry = 'images/placehoder-image-square.jpg';
 
-function updateImgURL(event) {
-  if (event.target.value.length === 0) {
-    // $imgEntry.setAttribute('src', '');
-    $imgEntry.setAttribute('src', placeholderImgEntry);
-  } else {
-    $imgEntry.setAttribute('src', event.target.value);
-  }
+var $formElement = document.querySelector('form');
+$formElement.addEventListener('submit', saveEntryHandle);
+
+function updateImgURLHandle(event) {
+  $imgEntry.setAttribute('src', event.target.value);
+}
+
+function saveEntryHandle(event) {
+  event.preventDefault();
+  var formDataObj = {
+    title: $formElement.elements.title.value,
+    imgURL: $formElement.elements.photo.value,
+    notes: $formElement.elements.notes.value,
+    entryId: data.nextEntryId
+  };
+  data.entries.unshift(formDataObj);
+  data.nextEntryId++;
+  $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $formElement.reset();
 }
