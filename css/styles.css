@@ -1,3 +1,41 @@
+* {
+  font-family: sans-serif;
+}
+
+body {
+  background-color: rgb(240, 240, 240);
+}
+
+/* Entry Page */
+
+img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+button {
+  text-align: center;
+  background-color: rgb(86 42 129);
+  border: none;
+  color: white;
+  padding: 5px 13px;
+  border-radius: 3px;
+}
+
+input,
+textarea {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+
+.flex-right {
+  display: flex;
+  justify-content: right;
+}
+
 .navbar {
   height: 40px;
   width: 100%;
@@ -7,4 +45,5 @@
 
 .navbar > h1 {
   margin: 0;
+  font-weight: lighter;
 }
