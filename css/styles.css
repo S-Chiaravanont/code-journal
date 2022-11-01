@@ -6,11 +6,22 @@ body {
   background-color: rgb(240, 240, 240);
 }
 
+.hidden {
+  visibility: none;
+}
+
 /* Entry Page */
 
 .navbar h2 {
   font-weight: 400;
   margin: 13px 0;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.navbar h3 {
+  display: inline-block;
+  font-weight: 400;
 }
 
 img {
@@ -60,4 +71,42 @@ textarea:focus {
 .navbar {
   background-color: rgb(86 42 129);
   color: white;
+}
+
+/* View entries */
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+[data-view="entries"] h1 {
+  display: inline-block;
+}
+
+.display-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-button {
+  height: 28px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.no-entries {
+  text-align: center;
 }
