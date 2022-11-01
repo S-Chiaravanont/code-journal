@@ -110,3 +110,22 @@ button:hover {
 .no-entries {
   text-align: center;
 }
+
+.inline-block {
+  display: inline-block;
+}
+
+.parag-margin {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.edit-pos {
+  position: absolute;
+  right: 0;
+  top: 25px;
+}
+
+.pos-rel {
+  position: relative;
+}

@@ -47,10 +47,14 @@ function saveEntryHandle(event) {
 function renderEntry(entry) {
   var $notesElement = document.createElement('p');
   $notesElement.textContent = entry.notes;
+  $notesElement.setAttribute('class', 'parag-margin');
+  var $penEditElement = document.createElement('i');
+  $penEditElement.setAttribute('class', 'fa-solid fa-pen edit-pos');
   var $titleElement = document.createElement('h2');
   $titleElement.textContent = entry.title;
+  $titleElement.setAttribute('class', 'inline-block');
   var $divEntryText = document.createElement('div');
-  $divEntryText.setAttribute('class', 'column-half');
+  $divEntryText.setAttribute('class', 'column-half pos-rel');
   var $entryImg = document.createElement('img');
   $entryImg.setAttribute('src', entry.imgURL);
   var $entryImgFrame = document.createElement('div');
@@ -59,11 +63,13 @@ function renderEntry(entry) {
   $divEntryImg.setAttribute('class', 'column-half');
   var $listElement = document.createElement('li');
   $listElement.setAttribute('class', 'row');
+  $listElement.setAttribute('data-entry-id', entry.entryId);
   $listElement.appendChild($divEntryImg);
   $listElement.appendChild($divEntryText);
   $divEntryImg.appendChild($entryImgFrame);
   $entryImgFrame.appendChild($entryImg);
   $divEntryText.appendChild($titleElement);
+  $divEntryText.appendChild($penEditElement);
   $divEntryText.appendChild($notesElement);
   return $listElement;
 }
