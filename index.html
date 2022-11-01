@@ -25,14 +25,14 @@
         <div class="row">
           <div class="column-full">
             <h2>Code Journal</h2>
-            <h3><a>Entries</a></h3>
+            <h3><a id="to-entries">Entries</a></h3>
           </div>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <div data-view="entry-form">
+    <div data-view="entry-form" class="" id="create-entry">
       <form class="container" id="entry-form">
         <div class="row">
           <div class="column-full">
@@ -57,20 +57,22 @@
             </label>
           </div>
           <div class="column-full flex-right">
-            <button id="save-button" type="submit">SAVE</button>
+            <button id="save-button" type="submit" data-view="entries">SAVE</button>
           </div>
         </div>
       </form>
     </div>
-    <div class="container" data-view="entries">
-      <div class="row">
-        <div class="column-full display-between">
-          <h1>Entries</h1>
-          <button>NEW</button>
+    <div data-view="entries" class="hidden" id="view-entry">
+      <div class="container">
+        <div class="row">
+          <div class="column-full display-between">
+            <h1>Entries</h1>
+            <button class="new-button" data-view="entry-form">NEW</button>
+          </div>
         </div>
+        <ul id="entry-view-ul">
+        </ul>
       </div>
-      <ul id="entry-view-ul">
-      </ul>
     </div>
   </main>
   <script src="js/data.js"></script>

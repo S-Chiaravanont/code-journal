@@ -6,7 +6,20 @@ var $imgEntry = document.querySelector('#img-entry');
 var $formElement = document.querySelector('form');
 $formElement.addEventListener('submit', saveEntryHandle);
 
-var $entryView = document.querySelector('#entry-view-ul');
+var $entryViewList = document.querySelector('#entry-view-ul');
+
+window.addEventListener('DOMContentLoaded', loadEntries);
+
+window.addEventListener('DOMContentLoaded', onLoadSite);
+
+var $entryNavButton = document.querySelector('#to-entries');
+$entryNavButton.addEventListener('click', entryNavButtonHandle);
+
+var $viewEntry = document.querySelector('#view-entry');
+var $createEntry = document.querySelector('#create-entry');
+
+var $newButton = document.querySelector('.new-button');
+$newButton.addEventListener('click', newButtonHandle);
 
 function updateImgURLHandle(event) {
   $imgEntry.setAttribute('src', event.target.value);
@@ -24,6 +37,7 @@ function saveEntryHandle(event) {
   data.nextEntryId++;
   $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
   $formElement.reset();
+  entryNavButtonHandle(event);
 }
 
 function displayEntries(entry) {
@@ -50,7 +64,33 @@ function displayEntries(entry) {
   return $listElement;
 }
 
-for (var i = 0; i < data.entries.length; i++) {
-  var $entry = displayEntries(data.entries[i]);
-  $entryView.appendChild($entry);
+function loadEntries() {
+  $entryViewList.innerHTML = '';
+  for (var i = 0; i < data.entries.length; i++) {
+    var $entry = displayEntries(data.entries[i]);
+    $entryViewList.appendChild($entry);
+  }
+}
+
+function entryNavButtonHandle() {
+  // go to entries
+  $viewEntry.setAttribute('class', 'view');
+  $createEntry.setAttribute('class', 'view hidden');
+  loadEntries();
+  data.view = 'entries';
+}
+
+function newButtonHandle() {
+  // go to create entry
+  $viewEntry.setAttribute('class', 'view hidden');
+  $createEntry.setAttribute('class', 'view');
+  data.view = 'entry-form';
+}
+
+function onLoadSite() {
+  if (data.view === 'entry-form') {
+    newButtonHandle();
+  } else {
+    entryNavButtonHandle();
+  }
 }

@@ -6,6 +6,10 @@ body {
   background-color: rgb(240, 240, 240);
 }
 
+.hidden {
+  visibility: none;
+}
+
 /* Entry Page */
 
 .navbar h2 {
@@ -81,6 +85,10 @@ li {
   padding: 0;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 [data-view="entries"] h1 {
   display: inline-block;
 }
@@ -88,4 +96,13 @@ li {
 .display-between {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.new-button {
+  height: 28px;
+}
+
+button:hover {
+  cursor: pointer;
 }
