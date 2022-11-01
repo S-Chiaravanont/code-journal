@@ -106,3 +106,7 @@ a:hover {
 button:hover {
   cursor: pointer;
 }
+
+.no-entries {
+  text-align: center;
+}
