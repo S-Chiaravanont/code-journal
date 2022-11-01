@@ -2,6 +2,7 @@ var $photoURLInput = document.querySelector('#photo-url');
 $photoURLInput.addEventListener('change', updateImgURLHandle);
 
 var $imgEntry = document.querySelector('#img-entry');
+var $formTitle = document.querySelector('#form-title');
 
 var $formElement = document.querySelector('form');
 $formElement.addEventListener('submit', saveEntryHandle);
@@ -32,16 +33,31 @@ function saveEntryHandle(event) {
   var formDataObj = {
     title: $formElement.elements.title.value,
     imgURL: $formElement.elements.photo.value,
-    notes: $formElement.elements.notes.value,
-    entryId: data.nextEntryId
+    notes: $formElement.elements.notes.value
   };
-  data.entries.unshift(formDataObj);
-  data.nextEntryId++;
+  if (data.editing === null) {
+    formDataObj.entryId = data.nextEntryId;
+    data.entries.unshift(formDataObj);
+    data.nextEntryId++;
+    var $newEntry = renderEntry(formDataObj);
+    $entryViewList.prepend($newEntry);
+  } else {
+    formDataObj.entryId = data.editing.entryId;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing.entryId) {
+        data.entries[i].title = formDataObj.title;
+        data.entries[i].imgURL = formDataObj.imgURL;
+        data.entries[i].notes = formDataObj.notes;
+      }
+    }
+    var $editedEntry = renderEntry(formDataObj);
+    $entryViewList.prepend($editedEntry);
+  }
   $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
   $formElement.reset();
-  var $newEntry = renderEntry(formDataObj);
-  $entryViewList.prepend($newEntry);
+  data.editing = null;
   showEntriesList();
+  $formTitle.textContent = 'New Entry';
 }
 
 function renderEntry(entry) {
@@ -50,6 +66,7 @@ function renderEntry(entry) {
   $notesElement.setAttribute('class', 'parag-margin');
   var $penEditElement = document.createElement('i');
   $penEditElement.setAttribute('class', 'fa-solid fa-pen edit-pos');
+  $penEditElement.setAttribute('data-entry-id', entry.entryId);
   var $titleElement = document.createElement('h2');
   $titleElement.textContent = entry.title;
   $titleElement.setAttribute('class', 'inline-block');
@@ -62,8 +79,7 @@ function renderEntry(entry) {
   var $divEntryImg = document.createElement('div');
   $divEntryImg.setAttribute('class', 'column-half');
   var $listElement = document.createElement('li');
-  $listElement.setAttribute('class', 'row');
-  $listElement.setAttribute('data-entry-id', entry.entryId);
+  $listElement.setAttribute('class', 'row entry-list-item');
   $listElement.appendChild($divEntryImg);
   $listElement.appendChild($divEntryText);
   $divEntryImg.appendChild($entryImgFrame);
@@ -99,9 +115,28 @@ function showEntriesList() {
   data.view = 'entries';
 }
 
-function showEntryForm() {
+function showEntryForm(isEdit) {
   // go to create entry
   $viewEntry.setAttribute('class', 'view hidden');
   $createEntry.setAttribute('class', 'view');
   data.view = 'entry-form';
+}
+
+$entryViewList.addEventListener('click', editHandle);
+
+function editHandle(event) {
+  if (event.target.nodeName !== 'I') {
+    return;
+  }
+  $formTitle.textContent = 'Edit Entries';
+  showEntryForm();
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === parseInt(event.target.getAttribute('data-entry-id'))) {
+      data.editing = data.entries[i];
+    }
+  }
+  $formElement.elements.title.value = data.editing.title;
+  $formElement.elements.photo.value = data.editing.imgURL;
+  $formElement.elements.notes.value = data.editing.notes;
+  $imgEntry.setAttribute('src', data.editing.imgURL);
 }

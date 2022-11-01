@@ -10,6 +10,7 @@ var data = {
 var previousJournalEntries = localStorage.getItem('javascript-local-storage');
 if (previousJournalEntries !== null) {
   data = JSON.parse(previousJournalEntries);
+  data.editing = null;
 }
 
 window.addEventListener('beforeunload', beforeUnloadHandle);
