@@ -6,7 +6,7 @@ body {
   background-color: rgb(240, 240, 240);
 }
 
-.hidden {
+.none {
   visibility: none;
 }
 
@@ -111,6 +111,8 @@ button:hover {
   text-align: center;
 }
 
+/* Edit Feature */
+
 .inline-block {
   display: inline-block;
 }
@@ -130,11 +132,58 @@ button:hover {
   position: relative;
 }
 
+/* Delete feature */
+
 .bg-gray {
   position: fixed;
-  background-color: rgba(128, 128, 128, 0.417);
+  background-color: rgba(0, 0, 0, 0.728);
   width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
+}
+
+div#save-div > a {
+  text-decoration: underline;
+}
+
+.delete-modal {
+  width: 370px;
+  height: 130px;
+  background-color: white;
+  text-align: center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 7px;
+}
+
+h4 {
+  padding: 30px 0;
+  margin: 0;
+}
+
+div.delete-modal button {
+  width: 85px;
+  padding: 0;
+  height: 32px;
+}
+
+.cancel-button {
+  color: black;
+  background-color: rgb(182 182 182);
+  position: absolute;
+  left: 14px;
+}
+
+.confirm-button {
+  color: white;
+  background-color: red;
+  position: absolute;
+  right: 14px;
+}
+
+.vis-hidden {
+  visibility: hidden;
 }

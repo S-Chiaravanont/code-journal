@@ -56,7 +56,8 @@
               <textarea name="notes" id="notes" cols="30" rows="10" required></textarea>
             </label>
           </div>
-          <div class="column-full flex-right">
+          <div class="column-full display-between">
+            <a href="#" id="delete-button" class="vis-hidden">Delete Entry</a>
             <button id="save-button" type="submit" data-view="entries">SAVE</button>
           </div>
         </div>
@@ -90,7 +91,13 @@
       </div>
     </div>
   </main>
-  <div class="bg-gray hidden"></div>
+  <div class="bg-gray hidden" id="delete-modal-div">
+    <div class="delete-modal">
+      <h4>Are you sure you want to delete this entry?</h4>
+      <button class="cancel-button" id="cancel-button">CANCEL</button>
+      <button class="confirm-button" id="confirm-delete-button">CONFIRM</button>
+    </div>
+  </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>

@@ -8,6 +8,7 @@ var $formElement = document.querySelector('form');
 $formElement.addEventListener('submit', saveEntryHandle);
 
 var $entryViewList = document.querySelector('#entry-view-ul');
+$entryViewList.addEventListener('click', editHandle);
 
 window.addEventListener('DOMContentLoaded', loadEntries);
 
@@ -19,6 +20,15 @@ var $createEntry = document.querySelector('#create-entry');
 
 var $newButton = document.querySelector('.new-button');
 $newButton.addEventListener('click', showEntryForm);
+
+var $deleteAnchor = document.querySelector('#delete-button');
+$deleteAnchor.addEventListener('click', deleteModalHandler);
+
+var $deleteModalDiv = document.querySelector('#delete-modal-div');
+var $cancelModalButton = document.querySelector('#cancel-button');
+$cancelModalButton.addEventListener('click', cancelDeleteHandler);
+var $confirmDeleteModalButton = document.querySelector('#confirm-delete-button');
+$confirmDeleteModalButton.addEventListener('click', confirmDeleteModalHandler);
 
 function updateImgURLHandle(event) {
   if (event.target.value === '') {
@@ -61,11 +71,7 @@ function saveEntryHandle(event) {
     }
     $itemToBeReplaced.replaceWith($editedEntry);
   }
-  $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $formElement.reset();
-  data.editing = null;
   showEntriesList();
-  $formTitle.textContent = 'New Entry';
 }
 
 function renderEntry(entry) {
@@ -122,6 +128,11 @@ function showEntriesList() {
   $createEntry.setAttribute('class', 'view hidden');
   data.view = 'entries';
   data.editing = null;
+  $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $formElement.reset();
+  $formTitle.textContent = 'New Entry';
+  $deleteAnchor.setAttribute('class', 'vis-hidden');
+  $deleteModalDiv.setAttribute('class', 'hidden');
 }
 
 function showEntryForm(isEdit) {
@@ -131,13 +142,12 @@ function showEntryForm(isEdit) {
   data.view = 'entry-form';
 }
 
-$entryViewList.addEventListener('click', editHandle);
-
 function editHandle(event) {
   if (event.target.nodeName !== 'I') {
     return;
   }
   $formTitle.textContent = 'Edit Entries';
+  $deleteAnchor.setAttribute('class', '');
   showEntryForm();
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].entryId === parseInt(event.target.getAttribute('data-entry-id'))) {
@@ -148,4 +158,31 @@ function editHandle(event) {
   $formElement.elements.photo.value = data.editing.imgURL;
   $formElement.elements.notes.value = data.editing.notes;
   $imgEntry.setAttribute('src', data.editing.imgURL);
+}
+
+function deleteModalHandler() {
+  $deleteModalDiv.setAttribute('class', 'bg-gray');
+}
+
+function cancelDeleteHandler() {
+  $deleteModalDiv.setAttribute('class', 'hidden');
+}
+
+function confirmDeleteModalHandler() {
+  var $itemNodes = document.querySelectorAll('i');
+  for (var j = 0; j < $itemNodes.length; j++) {
+    if (parseInt($itemNodes[j].getAttribute('data-entry-id')) === data.editing.entryId) {
+      var $itemToBeDeleted = $itemNodes[j].closest('.entry-list-item');
+      break;
+    }
+  }
+  $itemToBeDeleted.remove();
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.editing.entryId) {
+      var indexToBeSplice = i;
+      break;
+    }
+  }
+  data.entries.splice(indexToBeSplice, 1);
+  showEntriesList();
 }
