@@ -48,6 +48,7 @@ function saveEntryHandle(event) {
         data.entries[i].title = formDataObj.title;
         data.entries[i].imgURL = formDataObj.imgURL;
         data.entries[i].notes = formDataObj.notes;
+        break;
       }
     }
     var $editedEntry = renderEntry(formDataObj);
@@ -55,6 +56,7 @@ function saveEntryHandle(event) {
     for (var j = 0; j < $itemNodes.length; j++) {
       if (parseInt($itemNodes[j].getAttribute('data-entry-id')) === formDataObj.entryId) {
         var $itemToBeReplaced = $itemNodes[j].closest('.entry-list-item');
+        break;
       }
     }
     $itemToBeReplaced.replaceWith($editedEntry);
