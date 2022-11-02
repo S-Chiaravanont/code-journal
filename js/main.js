@@ -193,7 +193,7 @@ function confirmDeleteModalHandler() {
 
 function searchResultHandler(event) {
   var $entryItems = document.querySelectorAll('#entry-list-item');
-  if (event.target.value === '' || event.target.value.length === 2) {
+  if (event.target.value.length < 1) {
     for (var i = 0; i < $entryItems.length; i++) {
       $entryItems[i].attributes.class.value = 'row';
     }
