@@ -26,6 +26,13 @@ var $deleteAnchor = document.createElement('a');
 $deleteAnchor.textContent = 'Delete Entry';
 $deleteAnchor.setAttribute('id', 'delete-button');
 
+$deleteAnchor.addEventListener('click', deleteModalHandler);
+var $deleteModalDiv = document.querySelector('#delete-modal-div');
+var $cancelModalButton = document.querySelector('#cancel-button');
+$cancelModalButton.addEventListener('click', cancelDeleteHandler);
+var $confirmDeleteModalButton = document.querySelector('#confirm-delete-button');
+$confirmDeleteModalButton.addEventListener('click', confirmDeleteModalHandler);
+
 function updateImgURLHandle(event) {
   if (event.target.value === '') {
     $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -67,13 +74,7 @@ function saveEntryHandle(event) {
     }
     $itemToBeReplaced.replaceWith($editedEntry);
   }
-  $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $formElement.reset();
-  data.editing = null;
   showEntriesList();
-  $formTitle.textContent = 'New Entry';
-  $deleteAnchor.remove();
-  $saveDivElement.setAttribute('class', 'column-full flex-right');
 }
 
 function renderEntry(entry) {
@@ -135,6 +136,7 @@ function showEntriesList() {
   $formTitle.textContent = 'New Entry';
   $deleteAnchor.remove();
   $saveDivElement.setAttribute('class', 'column-full flex-right');
+  $deleteModalDiv.setAttribute('class', 'hidden');
 }
 
 function showEntryForm(isEdit) {
@@ -164,15 +166,29 @@ function editHandle(event) {
   $saveDivElement.setAttribute('class', 'column-full display-between');
 }
 
-$deleteAnchor.addEventListener('click', deleteModalHandler);
-var $deleteModalDiv = document.querySelector('#delete-modal-div');
-var $cancelModalButton = document.querySelector('#cancel-button');
-$cancelModalButton.addEventListener('click', cancelDeleteHandler);
-
-function deleteModalHandler(event) {
+function deleteModalHandler() {
   $deleteModalDiv.setAttribute('class', 'bg-gray');
 }
 
-function cancelDeleteHandler(event) {
+function cancelDeleteHandler() {
   $deleteModalDiv.setAttribute('class', 'hidden');
+}
+
+function confirmDeleteModalHandler() {
+  var $itemNodes = document.querySelectorAll('i');
+  for (var j = 0; j < $itemNodes.length; j++) {
+    if (parseInt($itemNodes[j].getAttribute('data-entry-id')) === data.editing.entryId) {
+      var $itemToBeDeleted = $itemNodes[j].closest('.entry-list-item');
+      break;
+    }
+  }
+  $itemToBeDeleted.remove();
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.editing.entryId) {
+      var indexToBeSplice = i;
+      break;
+    }
+  }
+  data.entries.splice(indexToBeSplice, 1);
+  showEntriesList();
 }
