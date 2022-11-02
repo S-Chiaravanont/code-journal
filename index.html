@@ -68,12 +68,16 @@
         <div class="row">
           <div class="column-full display-between">
             <h1>Entries</h1>
-            <button class="new-button" data-view="entry-form">NEW</button>
+            <div class="no-wrap">
+              <input type="search" placeholder="Search" class="search-box" id="search-box" name="searchBox">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <button class="new-button" data-view="entry-form">NEW</button>
+            </div>
           </div>
         </div>
         <ul id="entry-view-ul">
           <!--
-            <li class="row">
+            <li class="row" id="entry-list-item">
               <div class="column-half">
                 <div class="img-frame">
                   <img>
