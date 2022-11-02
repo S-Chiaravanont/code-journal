@@ -163,3 +163,16 @@ function editHandle(event) {
   $saveDivElement.prepend($deleteAnchor);
   $saveDivElement.setAttribute('class', 'column-full display-between');
 }
+
+$deleteAnchor.addEventListener('click', deleteModalHandler);
+var $deleteModalDiv = document.querySelector('#delete-modal-div');
+var $cancelModalButton = document.querySelector('#cancel-button');
+$cancelModalButton.addEventListener('click', cancelDeleteHandler);
+
+function deleteModalHandler(event) {
+  $deleteModalDiv.setAttribute('class', 'bg-gray');
+}
+
+function cancelDeleteHandler(event) {
+  $deleteModalDiv.setAttribute('class', 'hidden');
+}
