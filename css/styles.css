@@ -6,7 +6,7 @@ body {
   background-color: rgb(240, 240, 240);
 }
 
-.hidden {
+.none {
   visibility: none;
 }
 
@@ -182,4 +182,8 @@ div.delete-modal button {
   background-color: red;
   position: absolute;
   right: 14px;
+}
+
+.vis-hidden {
+  visibility: hidden;
 }

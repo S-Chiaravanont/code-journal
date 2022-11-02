@@ -21,12 +21,9 @@ var $createEntry = document.querySelector('#create-entry');
 var $newButton = document.querySelector('.new-button');
 $newButton.addEventListener('click', showEntryForm);
 
-var $saveDivElement = document.querySelector('#save-div');
-var $deleteAnchor = document.createElement('a');
-$deleteAnchor.textContent = 'Delete Entry';
-$deleteAnchor.setAttribute('id', 'delete-button');
-
+var $deleteAnchor = document.querySelector('#delete-button');
 $deleteAnchor.addEventListener('click', deleteModalHandler);
+
 var $deleteModalDiv = document.querySelector('#delete-modal-div');
 var $cancelModalButton = document.querySelector('#cancel-button');
 $cancelModalButton.addEventListener('click', cancelDeleteHandler);
@@ -134,8 +131,7 @@ function showEntriesList() {
   $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
   $formElement.reset();
   $formTitle.textContent = 'New Entry';
-  $deleteAnchor.remove();
-  $saveDivElement.setAttribute('class', 'column-full flex-right');
+  $deleteAnchor.setAttribute('class', 'vis-hidden');
   $deleteModalDiv.setAttribute('class', 'hidden');
 }
 
@@ -151,6 +147,7 @@ function editHandle(event) {
     return;
   }
   $formTitle.textContent = 'Edit Entries';
+  $deleteAnchor.setAttribute('class', '');
   showEntryForm();
   for (var i = 0; i < data.entries.length; i++) {
     if (data.entries[i].entryId === parseInt(event.target.getAttribute('data-entry-id'))) {
@@ -161,9 +158,6 @@ function editHandle(event) {
   $formElement.elements.photo.value = data.editing.imgURL;
   $formElement.elements.notes.value = data.editing.notes;
   $imgEntry.setAttribute('src', data.editing.imgURL);
-
-  $saveDivElement.prepend($deleteAnchor);
-  $saveDivElement.setAttribute('class', 'column-full display-between');
 }
 
 function deleteModalHandler() {
