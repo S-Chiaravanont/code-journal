@@ -31,4 +31,8 @@
   .column-half {
     width: 50%;
   }
+
+  .pos-rel {
+    right: 16px;
+  }
 }

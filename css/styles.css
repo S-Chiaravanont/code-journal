@@ -110,3 +110,31 @@ button:hover {
 .no-entries {
   text-align: center;
 }
+
+.inline-block {
+  display: inline-block;
+}
+
+.parag-margin {
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.edit-pos {
+  position: absolute;
+  right: 0;
+  top: 25px;
+}
+
+.pos-rel {
+  position: relative;
+}
+
+.bg-gray {
+  position: fixed;
+  background-color: rgba(128, 128, 128, 0.417);
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}

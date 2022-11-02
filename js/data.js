@@ -15,6 +15,7 @@ if (previousJournalEntries !== null) {
 window.addEventListener('beforeunload', beforeUnloadHandle);
 
 function beforeUnloadHandle(event) {
+  data.editing = null;
   var dataJSON = JSON.stringify(data);
   localStorage.setItem('javascript-local-storage', dataJSON);
 }
