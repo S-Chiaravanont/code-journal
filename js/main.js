@@ -30,6 +30,9 @@ $cancelModalButton.addEventListener('click', cancelDeleteHandler);
 var $confirmDeleteModalButton = document.querySelector('#confirm-delete-button');
 $confirmDeleteModalButton.addEventListener('click', confirmDeleteModalHandler);
 
+var $searchBoxElement = document.querySelector('#search-box');
+$searchBoxElement.addEventListener('input', searchResultHandler);
+
 function updateImgURLHandle(event) {
   if (event.target.value === '') {
     $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -65,7 +68,7 @@ function saveEntryHandle(event) {
     var $itemNodes = document.querySelectorAll('i');
     for (var j = 0; j < $itemNodes.length; j++) {
       if (parseInt($itemNodes[j].getAttribute('data-entry-id')) === formDataObj.entryId) {
-        var $itemToBeReplaced = $itemNodes[j].closest('.entry-list-item');
+        var $itemToBeReplaced = $itemNodes[j].closest('#entry-list-item');
         break;
       }
     }
@@ -93,7 +96,8 @@ function renderEntry(entry) {
   var $divEntryImg = document.createElement('div');
   $divEntryImg.setAttribute('class', 'column-half');
   var $listElement = document.createElement('li');
-  $listElement.setAttribute('class', 'row entry-list-item');
+  $listElement.setAttribute('class', 'row');
+  $listElement.setAttribute('id', 'entry-list-item');
   $listElement.appendChild($divEntryImg);
   $listElement.appendChild($divEntryText);
   $divEntryImg.appendChild($entryImgFrame);
@@ -172,7 +176,7 @@ function confirmDeleteModalHandler() {
   var $itemNodes = document.querySelectorAll('i');
   for (var j = 0; j < $itemNodes.length; j++) {
     if (parseInt($itemNodes[j].getAttribute('data-entry-id')) === data.editing.entryId) {
-      var $itemToBeDeleted = $itemNodes[j].closest('.entry-list-item');
+      var $itemToBeDeleted = $itemNodes[j].closest('#entry-list-item');
       break;
     }
   }
@@ -185,4 +189,19 @@ function confirmDeleteModalHandler() {
   }
   data.entries.splice(indexToBeSplice, 1);
   showEntriesList();
+}
+
+function searchResultHandler(event) {
+  var $entryItems = document.querySelectorAll('#entry-list-item');
+  if (event.target.value.length < 1) {
+    for (var i = 0; i < $entryItems.length; i++) {
+      $entryItems[i].attributes.class.value = 'row';
+    }
+
+  }
+  for (var j = 0; j < $entryItems.length; j++) {
+    if (!$entryItems[j].textContent.toLowerCase().includes(event.target.value)) {
+      $entryItems[j].attributes.class.value = 'row hidden';
+    }
+  }
 }
