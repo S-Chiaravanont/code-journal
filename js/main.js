@@ -8,6 +8,7 @@ var $formElement = document.querySelector('form');
 $formElement.addEventListener('submit', saveEntryHandle);
 
 var $entryViewList = document.querySelector('#entry-view-ul');
+$entryViewList.addEventListener('click', editHandle);
 
 window.addEventListener('DOMContentLoaded', loadEntries);
 
@@ -19,6 +20,11 @@ var $createEntry = document.querySelector('#create-entry');
 
 var $newButton = document.querySelector('.new-button');
 $newButton.addEventListener('click', showEntryForm);
+
+var $saveDivElement = document.querySelector('#save-div');
+var $deleteAnchor = document.createElement('a');
+$deleteAnchor.textContent = 'Delete Entry';
+$deleteAnchor.setAttribute('id', 'delete-button');
 
 function updateImgURLHandle(event) {
   if (event.target.value === '') {
@@ -66,6 +72,8 @@ function saveEntryHandle(event) {
   data.editing = null;
   showEntriesList();
   $formTitle.textContent = 'New Entry';
+  $deleteAnchor.remove();
+  $saveDivElement.setAttribute('class', 'column-full flex-right');
 }
 
 function renderEntry(entry) {
@@ -122,6 +130,11 @@ function showEntriesList() {
   $createEntry.setAttribute('class', 'view hidden');
   data.view = 'entries';
   data.editing = null;
+  $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $formElement.reset();
+  $formTitle.textContent = 'New Entry';
+  $deleteAnchor.remove();
+  $saveDivElement.setAttribute('class', 'column-full flex-right');
 }
 
 function showEntryForm(isEdit) {
@@ -130,8 +143,6 @@ function showEntryForm(isEdit) {
   $createEntry.setAttribute('class', 'view');
   data.view = 'entry-form';
 }
-
-$entryViewList.addEventListener('click', editHandle);
 
 function editHandle(event) {
   if (event.target.nodeName !== 'I') {
@@ -148,4 +159,7 @@ function editHandle(event) {
   $formElement.elements.photo.value = data.editing.imgURL;
   $formElement.elements.notes.value = data.editing.notes;
   $imgEntry.setAttribute('src', data.editing.imgURL);
+
+  $saveDivElement.prepend($deleteAnchor);
+  $saveDivElement.setAttribute('class', 'column-full display-between');
 }

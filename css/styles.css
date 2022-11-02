@@ -111,6 +111,8 @@ button:hover {
   text-align: center;
 }
 
+/* Edit Feature */
+
 .inline-block {
   display: inline-block;
 }
@@ -130,6 +132,8 @@ button:hover {
   position: relative;
 }
 
+/* Delete feature */
+
 .bg-gray {
   position: fixed;
   background-color: rgba(128, 128, 128, 0.417);
@@ -137,4 +141,8 @@ button:hover {
   height: 100vh;
   top: 0;
   left: 0;
+}
+
+div#save-div > a {
+  text-decoration: underline;
 }
