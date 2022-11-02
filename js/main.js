@@ -51,7 +51,13 @@ function saveEntryHandle(event) {
       }
     }
     var $editedEntry = renderEntry(formDataObj);
-    $entryViewList.prepend($editedEntry);
+    var $itemNodes = document.querySelectorAll('i');
+    for (var j = 0; j < $itemNodes.length; j++) {
+      if (parseInt($itemNodes[j].getAttribute('data-entry-id')) === formDataObj.entryId) {
+        var $itemToBeReplaced = $itemNodes[j].closest('.entry-list-item');
+      }
+    }
+    $itemToBeReplaced.replaceWith($editedEntry);
   }
   $imgEntry.setAttribute('src', 'images/placeholder-image-square.jpg');
   $formElement.reset();
@@ -113,6 +119,7 @@ function showEntriesList() {
   $viewEntry.setAttribute('class', 'view');
   $createEntry.setAttribute('class', 'view hidden');
   data.view = 'entries';
+  data.editing = null;
 }
 
 function showEntryForm(isEdit) {
