@@ -214,3 +214,8 @@ div.delete-modal button {
   display: inline;
   margin-left: 10px;
 }
+
+.tag-icon-style {
+  display: block;
+  margin-bottom: 10px;
+}
