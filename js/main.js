@@ -205,3 +205,18 @@ function searchResultHandler(event) {
     }
   }
 }
+
+var $tagIconDisplay = document.querySelectorAll('.tag-icon-div');
+var $tagSelect = document.querySelector('#tag');
+
+$tagSelect.addEventListener('change', updateTagIcon);
+
+function updateTagIcon(event) {
+  for (var i = 0; i < $tagIconDisplay.length; i++) {
+    if (event.target.value === $tagIconDisplay[i].firstElementChild.getAttribute('id')) {
+      $tagIconDisplay[i].setAttribute('class', 'tag-icon-div');
+    } else {
+      $tagIconDisplay[i].setAttribute('class', 'tag-icon-div hidden');
+    }
+  }
+}

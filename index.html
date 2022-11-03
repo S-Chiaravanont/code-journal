@@ -50,6 +50,38 @@
             <label for="photo-url"> Photo URL
               <input type="text" id="photo-url" name="photo" required>
             </label>
+            <div class="tag-selection">
+              <label for="tag">
+                <i class="fa-solid fa-hashtag"></i>
+                <select name="tag" id="tag">
+                  <option value="none">Choose a tag</option>
+                  <option value="animal">
+                    Animal
+                  </option>
+                  <option value="business">
+                    Business
+                  </option>
+                  <option value="entertainment">
+                    Entertainment
+                  </option>
+                  <option value="important">
+                    Important
+                  </option>
+                </select>
+              </label>
+              <div class="tag-icon-div hidden">
+                <i class="fa-solid fa-triangle-exclamation tag-icon" id="important"></i>
+              </div>
+              <div class="tag-icon-div hidden">
+                <i class="fa-solid fa-briefcase tag-icon" id="business"></i>
+              </div>
+              <div class="tag-icon-div hidden">
+                <i class="fa-sharp fa-solid fa-dog tag-icon" id="animal"></i>
+              </div>
+              <div class="tag-icon-div hidden">
+                <i class="fa-solid fa-music tag-icon" id="entertainment"></i>
+              </div>
+            </div>
           </div>
           <div class="column-full">
             <label for="notes">Notes
@@ -88,6 +120,7 @@
                 <i class="fa-solid fa-pen edit-pos"></i>
                 <br>
                 <p></p>
+                <i class="fa-solid fa-hashtag"></i>
               </div>
             </li>
            -->

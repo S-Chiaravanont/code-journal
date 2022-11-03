@@ -205,3 +205,12 @@ div.delete-modal button {
 .search-box:focus {
   width: 230px;
 }
+
+.tag-selection {
+  margin-bottom: 20px;
+}
+
+.tag-icon-div {
+  display: inline;
+  margin-left: 10px;
+}
